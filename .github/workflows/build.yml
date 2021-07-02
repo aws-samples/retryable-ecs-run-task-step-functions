@@ -1,0 +1,25 @@
+name: Build
+on: [push, workflow_dispatch]
+jobs:
+  Build-and-Test-CDK:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test
+  Build-and-Test-Application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Run unittest
+        working-directory: lambda/error_handler
+        run: python index.test.py
