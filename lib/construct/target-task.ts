@@ -1,17 +1,18 @@
-import * as cdk from "@aws-cdk/core";
-import * as ecs from "@aws-cdk/aws-ecs";
-import * as ec2 from "@aws-cdk/aws-ec2";
+import * as cdk from "aws-cdk-lib";
+import * as ecs from "aws-cdk-lib/aws-ecs";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import { Construct } from "constructs";
 
 interface TargetTaskProps {
     readonly vpc: ec2.IVpc;
 }
 
 // define a sample ecs task
-export class TargetTask extends cdk.Construct {
+export class TargetTask extends Construct {
     readonly retyableTaskDefinition: ecs.FargateTaskDefinition;
     readonly ecsCluster: ecs.Cluster;
 
-    constructor(scope: cdk.Construct, id: string, props: TargetTaskProps) {
+    constructor(scope: Construct, id: string, props: TargetTaskProps) {
         super(scope, id);
 
         const cluster = new ecs.Cluster(this, `Cluster`, {

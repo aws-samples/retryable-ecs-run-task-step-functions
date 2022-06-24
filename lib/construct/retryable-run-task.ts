@@ -1,9 +1,10 @@
-import * as cdk from "@aws-cdk/core";
-import * as sns from "@aws-cdk/aws-sns";
-import * as ecs from "@aws-cdk/aws-ecs";
-import * as sfn from "@aws-cdk/aws-stepfunctions";
-import * as sfnt from "@aws-cdk/aws-stepfunctions-tasks";
-import * as lambdapy from "@aws-cdk/aws-lambda-python";
+import * as sns from "aws-cdk-lib/aws-sns";
+import * as ecs from "aws-cdk-lib/aws-ecs";
+import * as sfn from "aws-cdk-lib/aws-stepfunctions";
+import * as sfnt from "aws-cdk-lib/aws-stepfunctions-tasks";
+import * as lambdapy from "@aws-cdk/aws-lambda-python-alpha";
+import { Construct } from "constructs";
+import { Runtime } from "aws-cdk-lib/aws-lambda";
 
 interface RetryableRunTaskProps {
     readonly cluster: ecs.ICluster;
@@ -13,10 +14,10 @@ interface RetryableRunTaskProps {
     readonly maxRetryCount?: number;
 }
 
-export class RetryableRunTask extends cdk.Construct {
+export class RetryableRunTask extends Construct {
     readonly stateMachine: sfn.StateMachine;
 
-    constructor(scope: cdk.Construct, id: string, props: RetryableRunTaskProps) {
+    constructor(scope: Construct, id: string, props: RetryableRunTaskProps) {
         super(scope, id);
 
         const runTask = new sfnt.EcsRunTask(this, `RunTask`, {
@@ -40,6 +41,7 @@ export class RetryableRunTask extends cdk.Construct {
         });
 
         const errorHandlerFunction = new lambdapy.PythonFunction(this, `ErrorHandlerFunction`, {
+            runtime: Runtime.PYTHON_3_9,
             entry: "./lambda/error_handler",
         });
 
@@ -50,14 +52,14 @@ export class RetryableRunTask extends cdk.Construct {
 
         const notifyError = new sfnt.SnsPublish(this, `NotifyError`, {
             topic: props.errorNotifyTopic,
-            message: sfn.TaskInput.fromDataAt("$"),
+            message: sfn.TaskInput.fromJsonPathAt("$"),
             subject: "Task failed",
             resultPath: "$.Notify",
         });
 
         const notifySuccess = new sfnt.SnsPublish(this, `NotifySuccess`, {
             topic: props.successNotifyTopic,
-            message: sfn.TaskInput.fromDataAt("$"),
+            message: sfn.TaskInput.fromJsonPathAt("$"),
             subject: "Task successfully proceessed.",
             resultPath: "$.Notify",
         });

@@ -1,6 +1,7 @@
 {
   "name": "retryable-ecs-run-task-step-functions",
   "version": "1.0.0",
+  "private": true,
   "bin": {
     "retryable-ecs-run-task-step-functions": "bin/retryable-ecs-run-task-step-functions.js"
   },
@@ -11,22 +12,21 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.109.0",
-    "@types/jest": "^26.0.10",
+    "@types/jest": "^27.5.0",
     "@types/node": "10.17.27",
-    "aws-cdk": "^1.109.0",
-    "jest": "^26.4.2",
-    "ts-jest": "^26.2.0",
-    "ts-node": "^9.0.0",
+    "@types/prettier": "2.6.0",
+    "aws-cdk": "^2.26.0",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
     "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda-python": "^1.105.0",
-    "@aws-cdk/aws-stepfunctions": "^1.105.0",
-    "@aws-cdk/aws-stepfunctions-tasks": "^1.105.0",
-    "@aws-cdk/aws-ecs": "^1.105.0",
-    "@aws-cdk/aws-sns": "^1.105.0",
-    "@aws-cdk/core": "^1.109.0",
-    "source-map-support": "^0.5.16"
+    "@aws-cdk/aws-lambda-python-alpha": "^2.29.0-alpha.0",
+    "@aws-cdk/aws-redshift-alpha": "^2.29.0-alpha.0",
+    "aws-cdk-lib": "^2.26.0",
+    "cdk-nag": "^2.14.29",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.21"
   }
 }

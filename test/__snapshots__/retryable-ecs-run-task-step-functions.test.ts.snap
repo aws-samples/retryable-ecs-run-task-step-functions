@@ -2,6 +2,100 @@
 
 exports[`Snapshot test 1`] = `
 Object {
+  "Mappings": Object {
+    "ServiceprincipalMap": Object {
+      "af-south-1": Object {
+        "states": "states.af-south-1.amazonaws.com",
+      },
+      "ap-east-1": Object {
+        "states": "states.ap-east-1.amazonaws.com",
+      },
+      "ap-northeast-1": Object {
+        "states": "states.ap-northeast-1.amazonaws.com",
+      },
+      "ap-northeast-2": Object {
+        "states": "states.ap-northeast-2.amazonaws.com",
+      },
+      "ap-northeast-3": Object {
+        "states": "states.ap-northeast-3.amazonaws.com",
+      },
+      "ap-south-1": Object {
+        "states": "states.ap-south-1.amazonaws.com",
+      },
+      "ap-southeast-1": Object {
+        "states": "states.ap-southeast-1.amazonaws.com",
+      },
+      "ap-southeast-2": Object {
+        "states": "states.ap-southeast-2.amazonaws.com",
+      },
+      "ap-southeast-3": Object {
+        "states": "states.ap-southeast-3.amazonaws.com",
+      },
+      "ca-central-1": Object {
+        "states": "states.ca-central-1.amazonaws.com",
+      },
+      "cn-north-1": Object {
+        "states": "states.cn-north-1.amazonaws.com",
+      },
+      "cn-northwest-1": Object {
+        "states": "states.cn-northwest-1.amazonaws.com",
+      },
+      "eu-central-1": Object {
+        "states": "states.eu-central-1.amazonaws.com",
+      },
+      "eu-north-1": Object {
+        "states": "states.eu-north-1.amazonaws.com",
+      },
+      "eu-south-1": Object {
+        "states": "states.eu-south-1.amazonaws.com",
+      },
+      "eu-south-2": Object {
+        "states": "states.eu-south-2.amazonaws.com",
+      },
+      "eu-west-1": Object {
+        "states": "states.eu-west-1.amazonaws.com",
+      },
+      "eu-west-2": Object {
+        "states": "states.eu-west-2.amazonaws.com",
+      },
+      "eu-west-3": Object {
+        "states": "states.eu-west-3.amazonaws.com",
+      },
+      "me-south-1": Object {
+        "states": "states.me-south-1.amazonaws.com",
+      },
+      "sa-east-1": Object {
+        "states": "states.sa-east-1.amazonaws.com",
+      },
+      "us-east-1": Object {
+        "states": "states.us-east-1.amazonaws.com",
+      },
+      "us-east-2": Object {
+        "states": "states.us-east-2.amazonaws.com",
+      },
+      "us-gov-east-1": Object {
+        "states": "states.us-gov-east-1.amazonaws.com",
+      },
+      "us-gov-west-1": Object {
+        "states": "states.us-gov-west-1.amazonaws.com",
+      },
+      "us-iso-east-1": Object {
+        "states": "states.amazonaws.com",
+      },
+      "us-iso-west-1": Object {
+        "states": "states.amazonaws.com",
+      },
+      "us-isob-east-1": Object {
+        "states": "states.amazonaws.com",
+      },
+      "us-west-1": Object {
+        "states": "states.us-west-1.amazonaws.com",
+      },
+      "us-west-2": Object {
+        "states": "states.us-west-2.amazonaws.com",
+      },
+    },
+  },
   "Outputs": Object {
     "StateMachineArn": Object {
       "Export": Object {
@@ -13,17 +107,10 @@ Object {
     },
   },
   "Parameters": Object {
-    "AssetParameters71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076ArtifactHashDC901665": Object {
-      "Description": "Artifact hash for asset \\"71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076\\"",
-      "Type": "String",
-    },
-    "AssetParameters71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076S3BucketB6D6813F": Object {
-      "Description": "S3 bucket for asset \\"71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076\\"",
-      "Type": "String",
-    },
-    "AssetParameters71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076S3VersionKey7D3D984B": Object {
-      "Description": "S3 key for asset version \\"71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076\\"",
-      "Type": "String",
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
   "Resources": Object {
@@ -37,41 +124,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076S3BucketB6D6813F",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076S3VersionKey7D3D984B",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters71c526719c321a030a9d72169612087f09812ac50e831113178269529f17a076S3VersionKey7D3D984B",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "c11290f0bf463172c28c632fd86b2f0a3a2b4ebd4f12d96fa7fd95751f37e878.zip",
         },
         "Handler": "index.handler",
         "Role": Object {
@@ -80,7 +135,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "python3.7",
+        "Runtime": "python3.9",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -383,12 +438,28 @@ Object {
             Object {
               "Action": "lambda:InvokeFunction",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
-                  "RetryableRunTaskErrorHandlerFunctionB011CBF3",
-                  "Arn",
-                ],
-              },
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "RetryableRunTaskErrorHandlerFunctionB011CBF3",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "RetryableRunTaskErrorHandlerFunctionB011CBF3",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
             },
             Object {
               "Action": "sns:Publish",
@@ -418,15 +489,12 @@ Object {
               "Effect": "Allow",
               "Principal": Object {
                 "Service": Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      "states.",
-                      Object {
-                        "Ref": "AWS::Region",
-                      },
-                      ".amazonaws.com",
-                    ],
+                  "Fn::FindInMap": Array [
+                    "ServiceprincipalMap",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    "states",
                   ],
                 },
               },
@@ -446,23 +514,7 @@ Object {
           Object {
             "Essential": true,
             "Image": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  Object {
-                    "Ref": "AWS::AccountId",
-                  },
-                  ".dkr.ecr.",
-                  Object {
-                    "Ref": "AWS::Region",
-                  },
-                  ".",
-                  Object {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/aws-cdk/assets:5d3fb8dc9645c94cb71db1b28551a533d3b81fe36754e6c7e2bcfe497e0b13ab",
-                ],
-              ],
+              "Fn::Sub": "\${AWS::AccountId}.dkr.ecr.\${AWS::Region}.\${AWS::URLSuffix}/cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}:62eef641d208875fba72e48b6713a74e47aacc64fa35c1ecd6fa63238dedcf09",
             },
             "LogConfiguration": Object {
               "LogDriver": "awslogs",
@@ -550,7 +602,10 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":repository/aws-cdk/assets",
+                    ":repository/",
+                    Object {
+                      "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
+                    },
                   ],
                 ],
               },
@@ -952,6 +1007,33 @@ Object {
         },
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
     },
   },
 }
