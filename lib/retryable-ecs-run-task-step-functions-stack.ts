@@ -1,11 +1,12 @@
-import * as cdk from "@aws-cdk/core";
-import * as sns from "@aws-cdk/aws-sns";
-import * as ec2 from "@aws-cdk/aws-ec2";
+import * as cdk from "aws-cdk-lib";
+import * as sns from "aws-cdk-lib/aws-sns";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { RetryableRunTask } from "./construct/retryable-run-task";
 import { TargetTask } from "./construct/target-task";
+import { Construct } from "constructs";
 
 export class RetryableEcsRunTaskStepFunctionsStack extends cdk.Stack {
-    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
         const vpc = new ec2.Vpc(this, `Vpc`, { natGateways: 1 });
