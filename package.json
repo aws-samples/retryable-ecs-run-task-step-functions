@@ -1,5 +1,5 @@
 {
-  "name": "retryable-ecs-run-task-step-functions",
+  "name": "@aws-samples/retryable-ecs-run-task-step-functions",
   "version": "1.0.0",
   "private": true,
   "bin": {
